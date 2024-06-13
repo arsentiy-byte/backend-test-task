@@ -19,3 +19,6 @@ check-env:
 ifeq (,$(wildcard ./.env))
 	cp .env.example .env
 endif
+
+test:
+	- docker-compose -f docker-compose.yml exec sio_test php bin/phpunit
