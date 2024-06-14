@@ -26,3 +26,18 @@ vendor/bin/php-cs-fixer fix
 ```shell
 make fixer
 ```
+
+## Анализатор кода
+> Используется библиотека [PHPStan](https://phpstan.org/)
+> Конфигурация в [phpstan.dist.neon](../phpstan.dist.neon)
+
+Для запуска анализатора используется команда:
+```shell
+vendor/bin/phpstan analyse -c phpstan.dist.neon
+```
+
+Или
+
+```shell
+make phpstan
+```

@@ -28,3 +28,6 @@ fixer-test:
 
 fixer:
 	- docker-compose -f docker-compose.yml exec sio_test vendor/bin/php-cs-fixer fix
+
+phpstan:
+	- docker-compose -f docker-compose.yml exec sio_test vendor/bin/phpstan analyse -c phpstan.dist.neon
