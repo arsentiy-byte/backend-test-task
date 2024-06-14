@@ -16,18 +16,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['api'])]
+    #[Groups(['user_list'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Groups(['api'])]
+    #[Groups(['user_list'])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
-    #[Groups(['api'])]
+    #[Groups(['user_list'])]
     private array $roles = [];
 
     /**
