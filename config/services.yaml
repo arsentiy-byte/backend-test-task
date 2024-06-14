@@ -20,8 +20,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Controller\Authentication\:
-        resource: '../src/Controller/Authentication'
+    App\Controller\:
+        resource: '../src/Controller'
         tags: [ 'controller.service_arguments' ]
         public: true
 

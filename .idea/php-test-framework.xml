@@ -5,7 +5,6 @@
       <tool tool_name="PHPUnit">
         <cache>
           <versions>
-            <info id="Local/Users/arsentiyzhunussov/PhpstormProjects/backend-test/vendor/autoload.php" version="PHPUnit version can't be detected. Default PHP interpreter is not local" />
             <info id="interpreter-4ca4cb4d-d91e-475a-a878-eb49952dc107" version="11.2.1" />
           </versions>
         </cache>

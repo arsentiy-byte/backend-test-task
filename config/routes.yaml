@@ -12,5 +12,5 @@ api_refresh_token:
 
 api_register:
     path: /api/register
-    controller: App\Controller\Authentication\RegistrationController::register
+    controller: App\Controller\Authentication\RegistrationAction
     methods: POST

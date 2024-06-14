@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -15,34 +16,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['api'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['api'])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(['api'])]
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
+    /**
+     * @param string $email
+     * @param list<string> $roles
+     * @param string $hashedPassword
+     * @return self
+     */
+    public static function create(string $email, array $roles, string $hashedPassword): self
+    {
+        $self = new self();
+
+        $self
+            ->setEmail($email)
+            ->setRoles($roles)
+            ->setPassword($hashedPassword);
+
+        return $self;
+    }
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    /**
+     * @param string $email
+     * @return self
+     */
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -52,6 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * A visual identifier that represents this user.
      *
+     * @return string
      * @see UserInterface
      */
     public function getUserIdentifier(): string
@@ -74,8 +107,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @param list<string> $roles
+     * @return self
      */
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -83,6 +117,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return string
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
@@ -90,7 +125,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    /**
+     * @param string $password
+     * @return self
+     */
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 

@@ -11,6 +11,6 @@ class HealthCheckAction
 {
     public function __invoke(): Response
     {
-        return new JsonResponse(['status' => 'ok']);
+        return new JsonResponse(['message' => 'Success']);
     }
 }

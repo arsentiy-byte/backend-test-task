@@ -18,6 +18,6 @@ class HealthCheckActionTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
         $jsonResult = \json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        self::assertEquals('ok', $jsonResult['status']);
+        self::assertEquals('Success', $jsonResult['message']);
     }
 }
