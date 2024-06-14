@@ -22,3 +22,9 @@ endif
 
 test:
 	- docker-compose -f docker-compose.yml exec sio_test php bin/phpunit
+
+fixer-test:
+	- docker-compose -f docker-compose.yml exec sio_test vendor/bin/php-cs-fixer fix --dry-run --diff
+
+fixer:
+	- docker-compose -f docker-compose.yml exec sio_test vendor/bin/php-cs-fixer fix
