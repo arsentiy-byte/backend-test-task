@@ -28,10 +28,10 @@ class PriceCalculationAction
      */
     public function __invoke(#[MapRequestPayload] PriceCalculationDTO $dto): JsonResponse
     {
-        $price = $this->handler->handle($dto);
+        $result = $this->handler->handle($dto);
 
         return new JsonResponse([
-            'price' => $price,
+            'price' => $result->calculatedPrice,
         ], Response::HTTP_OK);
     }
 }

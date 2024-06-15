@@ -9,6 +9,7 @@ use App\Entity\Voucher;
 use App\Repository\ProductRepository;
 use App\Repository\TaxRepository;
 use App\Repository\VoucherRepository;
+use App\ValueObject\PriceCalculationResultVO;
 
 readonly class PriceCalculationHandler
 {
@@ -26,9 +27,9 @@ readonly class PriceCalculationHandler
 
     /**
      * @param PriceCalculationDTO $dto
-     * @return float
+     * @return PriceCalculationResultVO
      */
-    public function handle(PriceCalculationDTO $dto): float
+    public function handle(PriceCalculationDTO $dto): PriceCalculationResultVO
     {
         /** @var Product $product */
         $product = $this->productRepository->findOneBy(['id' => $dto->product]);
@@ -37,6 +38,13 @@ readonly class PriceCalculationHandler
         /** @var Voucher|null $voucher */
         $voucher = $this->voucherRepository->findOneBy(['code' => $dto->couponCode]);
 
-        return $product->calculatePrice($tax, $voucher);
+        $calculatedPrice = $product->calculatePrice($tax, $voucher);
+
+        return new PriceCalculationResultVO(
+            $product,
+            $tax,
+            $voucher,
+            $calculatedPrice,
+        );
     }
 }

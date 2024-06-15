@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TaxRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TaxRepository::class)]
 class Tax
@@ -14,6 +15,7 @@ class Tax
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['order_list'])]
     private ?string $code = null;
 
     #[ORM\Column(length: 255, unique: true)]

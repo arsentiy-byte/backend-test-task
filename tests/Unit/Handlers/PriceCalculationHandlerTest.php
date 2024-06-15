@@ -38,9 +38,9 @@ class PriceCalculationHandlerTest extends KernelTestCase
             $voucher->getCode(),
         );
 
-        $calculatedPrice = $this->handler->handle($dto);
+        $result = $this->handler->handle($dto);
 
-        self::assertSame($product->calculatePrice($tax, $voucher), $calculatedPrice);
+        self::assertSame($product->calculatePrice($tax, $voucher), $result->calculatedPrice);
     }
 
     public function testPriceCalculationWithoutCoupon(): void
@@ -56,8 +56,8 @@ class PriceCalculationHandlerTest extends KernelTestCase
             null,
         );
 
-        $calculatedPrice = $this->handler->handle($dto);
+        $result = $this->handler->handle($dto);
 
-        self::assertSame($product->calculatePrice($tax), $calculatedPrice);
+        self::assertSame($product->calculatePrice($tax), $result->calculatedPrice);
     }
 }

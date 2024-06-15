@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Enums\DiscountType;
 use App\Repository\VoucherRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VoucherRepository::class)]
 class Voucher
@@ -15,6 +16,7 @@ class Voucher
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['order_list'])]
     private ?string $code = null;
 
     #[ORM\Column(enumType: DiscountType::class)]
