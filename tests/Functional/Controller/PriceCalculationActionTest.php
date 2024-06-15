@@ -46,6 +46,11 @@ class PriceCalculationActionTest extends FunctionalTestCase
             'couponCode' => 'none',
         ]);
 
-        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+        self::assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $jsonResult = \json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('Invalid payload', $jsonResult['message']);
+        self::assertArrayHasKey('product', $jsonResult['errors']);
+        self::assertArrayHasKey('taxNumber', $jsonResult['errors']);
+        self::assertArrayHasKey('couponCode', $jsonResult['errors']);
     }
 }

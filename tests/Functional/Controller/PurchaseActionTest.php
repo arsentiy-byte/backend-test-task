@@ -72,6 +72,9 @@ class PurchaseActionTest extends FunctionalTestCase
             'paymentProcessor' => 'none',
         ]);
 
-        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+        self::assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $jsonResult = \json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('Invalid payload', $jsonResult['message']);
+        self::assertArrayHasKey('paymentProcessor', $jsonResult['errors']);
     }
 }
