@@ -8,3 +8,4 @@
 - [Тесты](docs/tests.md)
 - [CI](docs/ci.md)
 - [Swagger документация](docs/swagger.md)
+- [Тестовые данные](docs/test_data.md)
