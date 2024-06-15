@@ -104,6 +104,6 @@ class Product
             $price -= $voucher->calculateDiscount($price);
         }
 
-        return $price;
+        return \max($price, 0);
     }
 }
