@@ -89,4 +89,21 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @param Tax $tax
+     * @param Voucher|null $voucher
+     * @return float
+     */
+    public function calculatePrice(Tax $tax, ?Voucher $voucher = null): float
+    {
+        $price = $this->getPrice();
+        $price -= $price * $tax->getValue() / 100;
+
+        if (null !== $voucher) {
+            $price -= $voucher->calculateDiscount($price);
+        }
+
+        return $price;
+    }
 }

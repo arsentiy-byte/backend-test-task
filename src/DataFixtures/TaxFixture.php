@@ -18,22 +18,22 @@ class TaxFixture extends Fixture
         $faker = Factory::create();
         $taxes = [
             [
-                'code' => sprintf('DE%s', $faker->numerify('#########')),
+                'code' => 'DE795581124',
                 'country' => 'Германия',
                 'value' => 19,
             ],
             [
-                'code' => sprintf('IT%s', $faker->numerify('###########')),
+                'code' => 'IT87059898280',
                 'country' => 'Италия',
                 'value' => 22,
             ],
             [
-                'code' => sprintf('FRYY%s', $faker->numerify('#########')),
+                'code' => 'FRYY610521164',
                 'country' => 'Франция',
                 'value' => 20,
             ],
             [
-                'code' => sprintf('GR%s', $faker->numerify('#########')),
+                'code' => 'GR216746731',
                 'country' => 'Греция',
                 'value' => 24,
             ]

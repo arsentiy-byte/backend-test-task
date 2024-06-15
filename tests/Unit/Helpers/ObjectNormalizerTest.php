@@ -15,7 +15,6 @@ class ObjectNormalizerTest extends KernelTestCase
     {
         parent::setUp();
 
-        self::bootKernel();
         $this->normalizer = self::getContainer()->get(ObjectNormalizer::class);
     }
 

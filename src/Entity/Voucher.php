@@ -108,4 +108,17 @@ class Voucher
 
         return $this;
     }
+
+    /**
+     * @param float $price
+     * @return float
+     */
+    public function calculateDiscount(float $price): float
+    {
+        if ($this->getDiscountType() === DiscountType::PERCENTAGE) {
+            return $price * $this->getDiscount() / 100;
+        }
+
+        return $this->getDiscount();
+    }
 }

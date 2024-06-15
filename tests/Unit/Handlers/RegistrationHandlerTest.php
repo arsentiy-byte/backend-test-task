@@ -15,7 +15,6 @@ class RegistrationHandlerTest extends KernelTestCase
     {
         parent::setUp();
 
-        self::bootKernel();
         $this->handler = self::getContainer()->get(RegistrationHandler::class);
     }
 

@@ -5,23 +5,26 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixture extends Fixture
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
+
     /**
      * @param ObjectManager $manager
      * @return void
      */
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
-
-        $user = User::create(
-            $faker->email,
-            ['ROLE_USER'],
-            $faker->password(10),
-        );
+        $user = new User();
+        $user
+            ->setEmail('test@example.com')
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordHasher->hashPassword($user, 'test'));
         $manager->persist($user);
 
         $manager->flush();

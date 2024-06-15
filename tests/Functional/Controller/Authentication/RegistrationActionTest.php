@@ -17,7 +17,7 @@ class RegistrationActionTest extends WebTestCase
 
         $email = $faker->email;
 
-        $client = static::createClient();
+        $client = self::createClient();
         $client->request(Request::METHOD_POST, '/api/register', [
             'email' => $email,
             'password' => $faker->password(12),
