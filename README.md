@@ -7,3 +7,4 @@
 - [Линтеры](docs/lints.md)
 - [Тесты](docs/tests.md)
 - [CI](docs/ci.md)
+- [Swagger документация](docs/swagger.md)

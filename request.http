@@ -1,0 +1,51 @@
+### Health Checker
+GET http://localhost:8337/health-check
+
+### Register
+POST http://localhost:8337/api/register
+Content-Type: application/json
+
+{
+  "email": "seven@example.com",
+  "password": "somethingLikeThis!!!123"
+}
+
+### Login
+POST http://localhost:8337/api/login_check
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "test"
+}
+
+### Refresh token
+POST http://localhost:8337/api/token/refresh
+Content-Type: application/json
+
+{
+  "refresh_token": "593051d744deaca169628ba4191169b3d75fff44338f1775fca152ef8d260f97b1860dfeb5af06aab04cecf8037defa22e7449f872014e788122dead693298cc"
+}
+
+### Calulcate Price
+POST http://localhost:8337/api/calculate-price
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MTg0ODgzNTcsImV4cCI6MTcxODQ5MTk1Nywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSJ9.T_Wd-VG7IU8wudpFvqfcx04Hxr-QjkHrKjCmyIDTLoSfPzxaDdUtAe6p6Pc1oXM-LUoNb3BaPn_yOLT-LHQj4GKoFDlcqOpBPr7AniYsdaOsXCI4KHK9C8b0HRPSCXT_yqDRuSCT41XPJIDlbJXxrgJJAoIKtJLFVPytb8Pkaly-7NTkf8NkXEEF4sknx-zMtqB0iPUPC8Dc72K5ymdBUmpQmiyZvfPILUEN4muFZ1zaRkdASlk7uj9whSsahJtzX9eT1hvMDkPiO0z364zIaEq8MdAj0YOc1nGdXo_ylQvXJs9Up5hIC6fRNvEqoqyHJe4hQ_xiVwaIpCyG425IfA
+
+{
+  "product": 13,
+  "taxNumber": "GR216746731",
+  "couponCode": "P10"
+}
+
+### Purchase
+POST http://localhost:8337/api/purchase
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MTg0ODM4NjgsImV4cCI6MTcxODQ4NzQ2OCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSJ9.BsbJSqystAYjA9cUc7MGACwDLLFdndSTDS7NxRWD0_BWRvpFtHxIBNWJytHfKoAsFSxNWFN0koOwoksNGVr-Wk7JnaCkrrapoPNNJJ45X27YaraY1iUvInx8r2CAnPBjHeSW015FnuP0Hg_qD3YAlRzf32N1beGSGnYgSPg-47ovSaOdypbliV7D25U35UwPImB4qVJIH0BAvy2SZDPHSdbf99psoeRBaMowP-1Mgxfwo5WWi8idIbcWEZhJRMUCZMCNz6fmAjEHzM45M6oed2OnpKQ01vAWEx23bVm2uwGsLLdUvxKkzP1mv3berOZIcjXFMpctr6GEIA_Rz8aPYg
+
+{
+  "product": 13,
+  "taxNumber": "GR216746731",
+  "couponCode": "P10",
+  "paymentProcessor": "paypal"
+}

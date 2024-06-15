@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\DTO\PriceCalculationDTO;
 use App\DTO\PurchaseDTO;
+use App\Entity\Order;
 use App\Entity\User;
 use App\Exceptions\PaymentProcessorException;
 use App\Handlers\PurchaseHandler;
 use App\Helpers\ObjectNormalizer;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security as OASecurity;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +21,25 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(path: '/api/purchase', name: 'purchase', methods: ['POST'])]
 #[IsGranted('ROLE_USER')]
+#[OA\RequestBody(
+    content: new OA\JsonContent(
+        required: ['product', 'taxNumber', 'paymentProcessor'],
+        properties: [
+            new OA\Property(property: 'product', type: 'integer'),
+            new OA\Property(property: 'taxNumber', type: 'string'),
+            new OA\Property(property: 'couponCode', type: 'string'),
+            new OA\Property(property: 'paymentProcessor', type: 'string'),
+        ],
+        type: 'object',
+    ),
+)]
+#[OA\Response(
+    response: Response::HTTP_OK,
+    description: 'Returns purchased order',
+    content: new Model(type: Order::class, groups: ['order_list'])
+)]
+#[OA\Tag(name: 'api')]
+#[OASecurity(name: 'Bearer')]
 class PurchaseAction
 {
     /**

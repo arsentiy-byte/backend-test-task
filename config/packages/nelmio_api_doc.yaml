@@ -1,0 +1,22 @@
+nelmio_api_doc:
+    use_validation_groups: true
+    documentation:
+        servers:
+            - url: http://localhost:8337
+              description: API over HTTP
+        info:
+            title: Backend Test Task
+            description: Testing task
+            version: 1.0.0
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+            - /health-check
