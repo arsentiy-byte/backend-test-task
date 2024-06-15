@@ -2,6 +2,7 @@
 
 namespace App\Handlers;
 
+use App\Contracts\Services\PaymentProcessorServiceContract;
 use App\DTO\PriceCalculationDTO;
 use App\DTO\PurchaseDTO;
 use App\Entity\Order;
@@ -9,8 +10,6 @@ use App\Entity\User;
 use App\Enums\PaymentProcessor;
 use App\Exceptions\PaymentProcessorException;
 use App\Repository\OrderRepository;
-use App\Services\PaymentProcessorService\PaypalPaymentProcessor;
-use App\Services\PaymentProcessorService\StripePaymentProcessor;
 use App\ValueObject\PriceCalculationResultVO;
 
 readonly class PurchaseHandler
@@ -22,6 +21,7 @@ readonly class PurchaseHandler
     public function __construct(
         private PriceCalculationHandler $priceCalculationHandler,
         private OrderRepository $orderRepository,
+        private PaymentProcessorServiceContract $paymentProcessorService,
     ) {
     }
 
@@ -39,7 +39,7 @@ readonly class PurchaseHandler
         $order = $this->createOrder($result, $user, PaymentProcessor::from($dto->paymentProcessor));
 
         try {
-            $this->pay($order);
+            $this->paymentProcessorService->pay($order);
         } catch (PaymentProcessorException $exception) {
             $order->failOrder();
             $this->orderRepository->save($order);
@@ -76,22 +76,5 @@ readonly class PurchaseHandler
         $this->orderRepository->save($order);
 
         return $order;
-    }
-
-    /**
-     * @param Order $order
-     * @return void
-     */
-    private function pay(Order $order): void
-    {
-        if ($order->getPaymentProcessor() === PaymentProcessor::PAYPAL) {
-            PaypalPaymentProcessor::pay($order);
-
-            return;
-        }
-
-        if ($order->getPaymentProcessor() === PaymentProcessor::STRIPE) {
-            StripePaymentProcessor::pay($order);
-        }
     }
 }
