@@ -1,6 +1,6 @@
 # Линтеры
 
-## Laravel Pint для форматирования и стандартизации кода
+## PHP-CS-Fixer для форматирования и стандартизации кода
 
 > Используется библиотека [PHP-CS-Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)
 > Конфигурация в [.php-cs-fixer.dist.php](../.php-cs-fixer.dist.php)
